@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuroraSleep — Circadian Lighting & Sleep Optimization for Remote Teams</title>
+  <meta name="description" content="Transform your remote team's performance with science-backed circadian lighting plans and personalized sleep optimization. Better sleep, brighter teams.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aurorasleep.com/">
+  <meta property="og:title" content="AuroraSleep — Better Sleep for Remote Teams">
+  <meta property="og:description" content="Boost team productivity with circadian-aligned lighting and sleep optimization. Free audit available.">
+  <meta property="og:image" content="https://aurorasleep.com/og-image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aurorasleep.com/">
+  <meta property="twitter:title" content="AuroraSleep — Better Sleep for Remote Teams">
+  <meta property="twitter:description" content="Boost team productivity with circadian-aligned lighting and sleep optimization. Free audit available.">
+  <meta property="twitter:image" content="https://aurorasleep.com/twitter-image.png">
+
+  <style>
+    /* === CSS RESET === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* === CSS VARIABLES === */
+    :root {
+      --bg-deep: #0B1026;
+      --fg: #EAF2FF;
+      --aurora-cyan: #7FFFE1;
+      --aurora-magenta: #FF7DE3;
+      --aurora-lime: #B8FF6A;
+      --aurora-violet: #8B7CFF;
+      --glass: rgba(255, 255, 255, 0.08);
+      --stroke: rgba(255, 255, 255, 0.18);
+      --muted: #9FB0D1;
+      --accent: #7FFFE1;
+      
+      --space-1: 0.5rem;
+      --space-2: 1rem;
+      --space-3: 1.5rem;
+      --space-4: 2rem;
+      --space-6: 3rem;
+      --space-8: 4rem;
+      
+      --font-system: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    }
+
+    /* === GLOBAL STYLES === */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-system);
+      color: var(--fg);
+      background-color: var(--bg-deep);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-inline: clamp(1rem, 4vw, 2rem);
+    }
+
+    h1, h2, h3, h4 {
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+      margin-bottom: var(--space-3);
+    }
+
+    h3 {
+      font-size: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+    }
+
+    p {
+      color: var(--muted);
+      font-size: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--fg);
+    }
+
+    button, .btn {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.875rem 2rem;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+      color: var(--bg-deep);
+      box-shadow: 0 4px 20px rgba(127, 255, 225, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(127, 255, 225, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--glass);
+      color: var(--fg);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* === NAVIGATION === */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(11, 16, 38, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--fg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-size: 0% 2px;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      transition: background-size 0.3s ease;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+      background-size: 100% 2px;
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: var(--space-8);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      opacity: 0.3;
+      animation: aurora 20s ease-in-out infinite;
+    }
+
+    .hero::before {
+      background: radial-gradient(circle at 20% 50%, var(--aurora-cyan) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 30%, var(--aurora-magenta) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 80%, var(--aurora-violet) 0%, transparent 50%);
+      animation-duration: 25s;
+    }
+
+    .hero::after {
+      background: radial-gradient(circle at 60% 20%, var(--aurora-lime) 0%, transparent 40%),
+                  radial-gradient(circle at 30% 70%, var(--aurora-violet) 0%, transparent 40%);
+      animation-direction: reverse;
+    }
+
+    @keyframes aurora {
+      0%, 100% { transform: rotate(0deg) translate(0, 0); }
+      33% { transform: rotate(120deg) translate(50px, -50px); }
+      66% { transform: rotate(240deg) translate(-50px, 50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      margin-bottom: var(--space-3);
+      background: linear-gradient(135deg, var(--fg) 0%, var(--aurora-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subhead {
+      font-size: clamp(1.125rem, 2vw, 1.5rem);
+      color: var(--muted);
+      margin-bottom: var(--space-6);
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      padding: var(--space-3) 0;
+      flex-wrap: wrap;
+    }
+
+    .social-proof-item {
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-proof-item:hover {
+      opacity: 0.8;
+    }
+
+    /* === TRUST BADGES === */
+    .trust-badges {
+      padding: var(--space-6) 0;
+    }
+
+    .badges-row {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+    }
+
+    /* === FEATURES SECTION === */
+    .features {
+      padding: var(--space-8) 0;
+      position: relative;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .feature-card {
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--aurora-cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(127, 255, 225, 0.1);
+      border-color: var(--aurora-cyan);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-2);
+      color: var(--aurora-cyan);
+    }
+
+    .feature-card h3 {
+      margin-bottom: var(--space-2);
+      color: var(--fg);
+    }
+
+    .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: var(--space-2);
+      font-weight: 600;
+    }
+
+    /* === HOW IT WORKS === */
+    .how-it-works {
+      padding: var(--space-8) 0;
+      background: linear-gradient(180deg, transparent, rgba(127, 255, 225, 0.02), transparent);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--aurora-cyan), var(--aurora-violet));
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .timeline-step {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .step-node {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-3);
+      background: var(--glass);
+      border: 2px solid var(--aurora-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--aurora-cyan);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-step:hover .step-node {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(127, 255, 225, 0.4);
+    }
+
+    /* === RESULTS SECTION === */
+    .results {
+      padding: var(--space-8) 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--glass), rgba(127, 255, 225, 0.05));
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-number {
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      margin-top: var(--space-1);
+    }
+
+    .case-study {
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      backdrop-filter: blur(10px);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* === PRICING SECTION === */
+    .pricing {
+      padding: var(--space-8) 0;
+      background: linear-gradient(180deg, transparent, rgba(139, 124, 255, 0.02), transparent);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+      align-items: center;
+    }
+
+    .pricing-card {
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      transform: scale(1.05);
+      border-color: var(--aurora-cyan);
+      box-shadow: 0 20px 40px rgba(127, 255, 225, 0.15);
+    }
+
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+      color: var(--bg-deep);
+      padding: 0.25rem 1rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--aurora-violet);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.05) translateY(-4px);
+    }
+
+    .price {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 700;
+      margin: var(--space-3) 0;
+      color: var(--fg);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin: var(--space-3) 0;
+    }
+
+    .pricing-features li {
+      padding: var(--space-1) 0;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--aurora-cyan);
+      font-weight: 700;
+    }
+
+    /* === TESTIMONIALS === */
+    .testimonials {
+      padding: var(--space-8) 0;
+      overflow: hidden;
+    }
+
+    .testimonial-carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: var(--space-4);
+      padding: var(--space-2) 0;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .testimonial-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--fg);
+      margin-bottom: var(--space-3);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bg-deep);
+    }
+
+    .author-info {
+      text-align: left;
+    }
+
+    .author-name {
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .author-title {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: var(--space-1);
+      justify-content: center;
+      margin-top: var(--space-3);
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--aurora-cyan);
+      transform: scale(1.2);
+    }
+
+    /* === FAQ SECTION === */
+    .faq {
+      padding: var(--space-8) 0;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    details {
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      margin-bottom: var(--space-2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    details:hover {
+      border-color: var(--aurora-cyan);
+    }
+
+    details[open] {
+      box-shadow: 0 10px 30px rgba(127, 255, 225, 0.1);
+    }
+
+    summary {
+      padding: var(--space-3);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--fg);
+      list-style: none;
+      position: relative;
+      padding-right: var(--space-6);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      position: absolute;
+      right: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: var(--aurora-cyan);
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-3) var(--space-3);
+      color: var(--muted);
+    }
+
+    /* === LEAD FORM === */
+    .lead-form-section {
+      padding: var(--space-8) 0;
+      background: linear-gradient(180deg, transparent, rgba(127, 255, 225, 0.02), transparent);
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: var(--space-4);
+      backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-3);
+    }
+
+    label {
+      display: block;
+      margin-bottom: var(--space-1);
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--stroke);
+      border-radius: 8px;
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--aurora-cyan);
+      box-shadow: 0 0 0 3px rgba(127, 255, 225, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-1);
+      margin: var(--space-3) 0;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-top: 0.25rem;
+    }
+
+    .form-note {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: var(--space-1);
+    }
+
+    /* === FOOTER === */
+    footer {
+      padding: var(--space-6) 0 var(--space-4);
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+      border-top: 1px solid var(--stroke);
+      margin-top: var(--space-8);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .footer-column h4 {
+      margin-bottom: var(--space-2);
+      color: var(--fg);
+      font-size: 1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: var(--space-1);
+    }
+
+    .footer-column a {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--aurora-cyan);
+    }
+
+    .footer-bottom {
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--stroke);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .social-links {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--aurora-cyan);
+      color: var(--bg-deep);
+      transform: translateY(-2px);
+    }
+
+    /* === COOKIE BAR === */
+    .cookie-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 16, 38, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--stroke);
+      padding: var(--space-2) 0;
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    #cookie-dismiss:checked ~ .cookie-bar {
+      transform: translateY(100%);
+    }
+
+    #cookie-dismiss {
+      display: none;
+    }
+
+    .cookie-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .cookie-text {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .cookie-accept {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .timeline::before {
+        display: none;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* === REDUCED MOTION === */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cookie Consent Checkbox Hack -->
+  <input type="checkbox" id="cookie-dismiss">
+
+  <!-- Navigation -->
+  <header>
+    <nav class="container">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="AuroraSleep Logo">
+          <circle cx="16" cy="16" r="14" stroke="url(#gradient)" stroke-width="2"/>
+          <path d="M8 16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16C24 20.4183 20.4183 24 16 24" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+              <stop stop-color="#7FFFE1"/>
+              <stop offset="1" stop-color="#8B7CFF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        AuroraSleep
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#lead-form" class="btn btn-primary">Get Free Audit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Sleep smarter, work brighter</h1>
+      <p class="subhead">
+        Transform your remote team's performance with circadian-aligned lighting and personalized sleep routines backed by neuroscience
+      </p>
+      <div class="hero-cta">
+        <a href="#lead-form" class="btn btn-primary">Get a Free Sleep Audit</a>
+        <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+      </div>
+      <div class="social-proof">
+        <div class="social-proof-item">
+          <svg width="100" height="30" viewBox="0 0 100 30" fill="currentColor" aria-label="TechCorp">
+            <rect x="5" y="10" width="90" height="10" rx="2" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="social-proof-item">
+          <svg width="100" height="30" viewBox="0 0 100 30" fill="currentColor" aria-label="StartupX">
+            <circle cx="15" cy="15" r="10" opacity="0.3"/>
+            <rect x="30" y="10" width="65" height="10" rx="2" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="social-proof-item">
+          <svg width="100" height="30" viewBox="0 0 100 30" fill="currentColor" aria-label="RemoteCo">
+            <polygon points="15,5 25,25 5,25" opacity="0.3"/>
+            <rect x="30" y="10" width="65" height="10" rx="2" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="trust-badges">
+    <div class="container">
+      <div class="badges-row">
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0L10 6L16 6L11 10L13 16L8 12L3 16L5 10L0 6L6 6L8 0Z"/>
+          </svg>
+          GDPR-ready
+        </span>
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="currentColor" fill="none" stroke-width="2"/>
+            <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+          ISO-aligned processes
+        </span>
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 1C8 1 2 5 2 9C2 13 5 15 8 15C11 15 14 13 14 9C14 5 8 1 8 1Z"/>
+          </svg>
+          Backed by sleep science
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Transform how your team sleeps and works</h2>
+      <div class="features-grid">
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M24 12V24L32 32"/>
+          </svg>
+          <h3>Circadian-Aligned Lighting Plans</h3>
+          <p>Custom lighting schedules that sync with your team's natural rhythms, reducing eye strain and improving focus during core hours</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="8" y="8" width="32" height="32" rx="4"/>
+            <path d="M16 24L22 30L32 18"/>
+          </svg>
+          <h3>Remote-Team Sleep Workshops</h3>
+          <p>Interactive sessions teaching evidence-based techniques for sleep hygiene, chronotype optimization, and recovery protocols</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M24 8C24 8 8 16 8 28C8 36 16 40 24 40C32 40 40 36 40 28C40 16 24 8 24 8Z"/>
+          </svg>
+          <h3>Personalized Routine Coaching</h3>
+          <p>1-on-1 guidance to build sustainable pre-sleep routines that improve sleep latency and morning alertness</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M24 8V24"/>
+            <path d="M24 24L32 32"/>
+          </svg>
+          <h3>Workspace Light Mapping</h3>
+          <p>Analyze and optimize home office lighting for reduced blue light exposure and enhanced melatonin production</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M8 24H40M16 12L32 12M20 36L28 36"/>
+          </svg>
+          <h3>Jet Lag & Travel Playbooks</h3>
+          <p>Science-backed protocols for rapid time zone adjustment when team members travel or relocate</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="8" y="12" width="32" height="24" rx="2"/>
+            <circle cx="18" cy="24" r="3"/>
+            <circle cx="30" cy="24" r="3"/>
+          </svg>
+          <h3>Manager Sleep Literacy</h3>
+          <p>Train leaders to recognize fatigue signals and implement team-wide practices that respect natural energy cycles</p>
+          <a href="#how-it-works" class="feature-link">Learn more →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <h2>Your path to better team sleep</h2>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-node">1</div>
+          <h3>Assess</h3>
+          <p>Complete sleep surveys and light environment audits to establish baseline metrics</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-node">2</div>
+          <h3>Design</h3>
+          <p>Receive customized circadian plans and workspace lighting recommendations</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-node">3</div>
+          <h3>Coach</h3>
+          <p>4-week guided implementation with weekly check-ins and routine adjustments</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-node">4</div>
+          <h3>Optimize</h3>
+          <p>Monthly performance reviews with data-driven refinements and team reports</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results" class="results">
+    <div class="container">
+      <h2>Measurable impact on team performance</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">↓ 23%</div>
+          <div class="stat-label">Self-reported fatigue reduction</div>
+          <p class="form-note">Based on 6-month study across 500+ remote workers</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">↑ 18%</div>
+          <div class="stat-label">Increased focus in morning standups</div>
+          <p class="form-note">Manager assessment scores, 90-day average</p>
+        </div>
+      </div>
+      
+      <div class="case-study">
+        <h3>Case Study: TechFlow Solutions</h3>
+        <p>When TechFlow's 120-person distributed engineering team reported declining energy levels and increased burnout signals, we implemented a comprehensive sleep optimization program. Within 12 weeks, their Epworth Sleepiness Scale scores improved by 31%, and self-reported "deep work" hours increased from 3.2 to 4.7 per day.</p>
+        <p>The intervention included personalized light temperature schedules for each time zone, weekly sleep hygiene workshops, and manager training on recognizing circadian misalignment. Post-implementation surveys showed 89% of participants felt more energized during core collaboration hours, while sick days decreased by 15% quarter-over-quarter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Investment in your team's wellbeing</h2>
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <h3>Starter</h3>
+          <p>Perfect for small remote teams ready to prioritize sleep</p>
+          <div class="price">$2,400/mo</div>
+          <ul class="pricing-features">
+            <li>Up to 25 team members</li>
+            <li>Monthly group workshops</li>
+            <li>Basic light audits</li>
+            <li>Quarterly progress reports</li>
+            <li>Email support</li>
+          </ul>
+          <a href="#lead-form" class="btn btn-secondary">Start Free Audit</a>
+        </article>
+
+        <article class="pricing-card featured">
+          <h3>Growth</h3>
+          <p>Comprehensive sleep optimization for scaling teams</p>
+          <div class="price">$5,900/mo</div>
+          <ul class="pricing-features">
+            <li>Up to 100 team members</li>
+            <li>Bi-weekly workshops + 1-on-1s</li>
+            <li>Advanced workspace analysis</li>
+            <li>Monthly performance metrics</li>
+            <li>Priority Slack support</li>
+            <li>Manager sleep literacy training</li>
+          </ul>
+          <a href="#lead-form" class="btn btn-primary">Start Free Audit</a>
+        </article>
+
+        <article class="pricing-card">
+          <h3>Scale</h3>
+          <p>Enterprise-grade program with full customization</p>
+          <div class="price">Let's talk</div>
+          <ul class="pricing-features">
+            <li>Unlimited team members</li>
+            <li>Weekly touchpoints</li>
+            <li>Complete environmental design</li>
+            <li>Real-time dashboards</li>
+            <li>Dedicated success manager</li>
+            <li>Custom integrations</li>
+          </ul>
+          <a href="#lead-form" class="btn btn-secondary">Contact Sales</a>
+        </article>
+      </div>
+      <p class="form-note" style="text-align: center; margin-top: var(--space-4);">All prices in USD. VAT added where applicable. Annual contracts available with 15% discount.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>Teams sleeping better, working brighter</h2>
+      <div class="testimonial-carousel">
+        <div class="carousel-track">
+          <article class="testimonial-slide">
+            <p class="quote">"The light mapping exercise alone transformed my home office. I had no idea how much my evening screen setup was destroying my sleep. Now I fall asleep 45 minutes faster."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">SR</div>
+              <div class="author-info">
+                <div class="author-name">Sarah Rodriguez</div>
+                <div class="author-title">Engineering Lead, DataSync</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-slide">
+            <p class="quote">"Our team spans 8 time zones. AuroraSleep helped us create meeting schedules that respect everyone's peak energy windows. Engagement is up, fatigue is down."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MK</div>
+              <div class="author-info">
+                <div class="author-name">Marcus Kim</div>
+                <div class="author-title">VP Remote Culture, Nexus</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-slide">
+            <p class="quote">"The ROI is clear: fewer sick days, sharper decision-making, and a team that actually disconnects at night. This should be standard for every remote company."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AC</div>
+              <div class="author-info">
+                <div class="author-name">Alex Chen</div>
+                <div class="author-title">CEO, CloudFirst</div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-dots">
+          <span class="carousel-dot active"></span>
+          <span class="carousel-dot"></span>
+          <span class="carousel-dot"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2>Common questions about sleep optimization</h2>
+      <div class="faq-list">
+        <details>
+          <summary>How is this different from generic sleep apps?</summary>
+          <div class="faq-answer">
+            We focus specifically on remote work challenges: inconsistent schedules, excessive screen time, home office lighting, and async collaboration fatigue. Our programs address the unique circadian disruptions that come from working where you sleep, with interventions designed for distributed teams rather than individuals.
+          </div>
+        </details>
+
+        <details>
+          <summary>What data do you collect and how is it protected?</summary>
+          <div class="faq-answer">
+            We collect sleep quality metrics through validated questionnaires (Pittsburgh Sleep Quality Index, Morningness-Eveningness Questionnaire), never through invasive tracking. All data is encrypted, GDPR-compliant, and aggregated for team reports. Individual data is only visible to the employee unless explicitly shared.
+          </div>
+        </details>
+
+        <details>
+          <summary>How long are the workshops and when do they happen?</summary>
+          <div class="faq-answer">
+            Group workshops run 45-60 minutes and are scheduled across multiple time zones to ensure everyone can attend during their optimal learning window (typically mid-morning). Sessions are recorded for async viewing, with interactive components adapted for self-paced completion.
+          </div>
+        </details>
+
+        <details>
+          <summary>Can we implement this gradually with just one team first?</summary>
+          <div class="faq-answer">
+            Absolutely. Many clients start with a pilot team of 10-25 people to measure impact before company-wide rollout. We'll help you select an appropriate pilot group and establish success metrics. Pilot programs typically run 8-12 weeks with clear go/no-go decision points.
+          </div>
+        </details>
+
+        <details>
+          <summary>What if employees are skeptical about "workplace sleep coaching"?</summary>
+          <div class="faq-answer">
+            We frame everything as performance optimization, not medical intervention. Participation is always voluntary, and we emphasize personal benefits like more energy for hobbies and family time. Our coaches are trained to work with skeptics by focusing on small, practical wins rather than dramatic lifestyle changes.
+          </div>
+        </details>
+
+        <details>
+          <summary>How do you measure success beyond self-reported metrics?</summary>
+          <div class="faq-answer">
+            While we prioritize subjective wellbeing, we also track objective indicators like meeting attendance patterns, async response times, and voluntary overtime hours. Some clients integrate with their HRIS to monitor sick day usage and performance review scores, though this is entirely optional.
+          </div>
+        </details>
+
+        <details>
+          <summary>Do you provide equipment like blue-light glasses or smart bulbs?</summary>
+          <div class="faq-answer">
+            Our Growth and Scale plans include recommended equipment lists with vetted suppliers and bulk discount codes. While we don't directly provide hardware, we guide purchasing decisions and can coordinate drop-shipping for larger teams. The focus remains on behavioral change and environmental design rather than gadgets.
+          </div>
+        </details>
+
+        <details>
+          <summary>What happens after the initial program period?</summary>
+          <div class="faq-answer">
+            Most teams transition to a maintenance phase with monthly check-ins, quarterly workshops for new hires, and annual program refreshers. We provide self-service resources and train internal "sleep champions" to sustain momentum. Continuous improvement is tracked through bi-annual assessments.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section id="lead-form" class="lead-form-section">
+    <div class="container">
+      <h2>Request a Free Sleep Audit</h2>
+      <div class="form-container">
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Work Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required>
+          </div>
+
+          <div class="form-group">
+            <label for="team-size">Team Size</label>
+            <select id="team-size" name="team-size" required>
+              <option value="">Select team size</option>
+              <option value="1-10">1-10 employees</option>
+              <option value="11-25">11-25 employees</option>
+              <option value="26-50">26-50 employees</option>
+              <option value="51-100">51-100 employees</option>
+              <option value="100+">100+ employees</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timezone">Primary Time Zone</label>
+            <select id="timezone" name="timezone" required>
+              <option value="">Select time zone</option>
+              <option value="PST">Pacific (PST/PDT)</option>
+              <option value="MST">Mountain (MST/MDT)</option>
+              <option value="CST">Central (CST/CDT)</option>
+              <option value="EST">Eastern (EST/EDT)</option>
+              <option value="GMT">Greenwich Mean Time (GMT)</option>
+              <option value="CET">Central European (CET)</option>
+              <option value="JST">Japan Standard (JST)</option>
+              <option value="AEST">Australian Eastern (AEST)</option>
+              <option value="Multiple">Multiple time zones</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Tell us about your team's sleep challenges (optional)</label>
+            <textarea id="message" name="message" placeholder="E.g., late-night Slack messages, energy crashes, timezone coordination..."></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">
+              I agree to receive sleep optimization insights and program updates. No spam, ever. Your data is encrypted and never sold.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Get My Audit Plan</button>
+          
+          <p class="form-note">We'll analyze your submission and send a personalized audit plan within 48 hours</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Science</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Sleep Audits</a></li>
+            <li><a href="#">Team Workshops</a></li>
+            <li><a href="#">Light Mapping</a></li>
+            <li><a href="#">Manager Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Sleep Science 101</a></li>
+            <li><a href="#">Remote Work Guide</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Research Papers</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Data Protection</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+          <p class="form-note" style="margin-top: var(--space-2);">
+            AuroraSleep Inc.<br>
+            123 Innovation Way<br>
+            San Francisco, CA 94105<br>
+            <a href="mailto:hello@aurorasleep.com">hello@aurorasleep.com</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 AuroraSleep. Better sleep, brighter teams.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M5 3C5 4.1 4.1 5 3 5S1 4.1 1 3s.9-2 2-2 2 .9 2 2zM1 7h4v12H1V7zm6 0h4v1.6c.5-1 1.8-1.9 3.7-1.9C17.5 6.7 19 8.4 19 12v7h-4v-6.5c0-1.5-.5-2.5-1.9-2.5-1 0-1.6.7-1.9 1.3-.1.2-.1.5-.1.8V19H7V7z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M19 3.8c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.5 1-1.5-1.6-4.1-1.7-5.7-.2-1.1 1-1.5 2.5-1.2 3.9C5.9 6.7 3.1 5.2 1.3 2.8.3 4.6.8 7.1 2.6 8.3c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.3 3.5 3.1 3.8-.6.2-1.2.2-1.8 0 .5 1.6 2 2.7 3.7 2.8-1.4 1.1-3.1 1.6-4.9 1.6-.3 0-.6 0-.9-.1C1.9 17.3 4 18 6.3 18 13.8 18 18 11.8 18 6.3v-.5c.8-.6 1.4-1.3 2-2z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M19.6 5.2s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C14 2 10 2 10 2s-4 0-6.8.2c-.4 0-1.2 0-2 .9-.6.6-.8 2-.8 2S0 7 0 8.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.4.8 2c.8.8 1.8.8 2.2.9 1.6.2 6.6.2 6.6.2s4 0 6.8-.2c.4 0 1.2 0 2-.9.6-.6.8-2 .8-2s.2-1.8.2-3.6V8.8c.4-1.8.2-3.6.2-3.6zM8 13V7l5.3 3L8 13z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Bar -->
+  <div class="cookie-bar">
+    <div class="container cookie-content">
+      <span class="cookie-text">We use cookies to improve your experience and analyze site usage. By continuing, you agree to our cookie policy.</span>
+      <label for="cookie-dismiss" class="btn btn-primary cookie-accept">Accept & Continue</label>
+    </div>
+  </div>
+</body>
+</html>

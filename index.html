@@ -728,6 +728,134 @@
       color: var(--fg);
     }
 
+    /* === STICKY CTA === */
+    .sticky-cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .sticky-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .sticky-cta .btn {
+      box-shadow: 0 10px 40px rgba(127, 255, 225, 0.4);
+    }
+
+    /* === CTA SECTION === */
+    .cta-section {
+      padding: var(--space-6) 0;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-3);
+    }
+
+    /* === MULTI-STEP FORM === */
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .progress-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .progress-step.active {
+      color: var(--aurora-cyan);
+      font-weight: 600;
+    }
+
+    .progress-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--glass);
+      border: 2px solid var(--stroke);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .progress-step.active .progress-number {
+      background: var(--aurora-cyan);
+      color: var(--bg-deep);
+      border-color: var(--aurora-cyan);
+    }
+
+    .progress-step.completed .progress-number {
+      background: rgba(127, 255, 225, 0.2);
+      border-color: var(--aurora-cyan);
+      color: var(--aurora-cyan);
+    }
+
+    .form-navigation {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--stroke);
+    }
+
+    .btn-back:hover {
+      background: var(--glass);
+      color: var(--fg);
+    }
+
+    /* === FEATURE PREVIEW === */
+    .feature-preview {
+      margin-top: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--stroke);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .feature-preview strong {
+      color: var(--aurora-cyan);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
     /* === PRICING SECTION === */
     .pricing {
       padding: var(--space-8) 0;
@@ -1284,36 +1412,48 @@
     <div class="container">
       <h2>Transform how your team sleeps and works</h2>
       <div class="features-grid">
-        <article class="feature-card">
+        <article class="feature-card" id="circadian-lighting">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="24" cy="24" r="20"/>
             <path d="M24 12V24L32 32"/>
           </svg>
           <h3>Circadian-Aligned Lighting Plans</h3>
           <p>Custom lighting schedules that sync with your team's natural rhythms, reducing eye strain and improving focus during core hours</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            Personalized light temperature schedules • Blue light exposure mapping • Lux level recommendations • Time-zone-aware automation scripts
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
 
-        <article class="feature-card">
+        <article class="feature-card" id="sleep-workshops">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <rect x="8" y="8" width="32" height="32" rx="4"/>
             <path d="M16 24L22 30L32 18"/>
           </svg>
           <h3>Remote-Team Sleep Workshops</h3>
           <p>Interactive sessions teaching evidence-based techniques for sleep hygiene, chronotype optimization, and recovery protocols</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            4x 60-min live sessions • Recorded replays • Downloadable sleep toolkit • Chronotype assessment for each team member
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
 
-        <article class="feature-card">
+        <article class="feature-card" id="routine-coaching">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M24 8C24 8 8 16 8 28C8 36 16 40 24 40C32 40 40 36 40 28C40 16 24 8 24 8Z"/>
           </svg>
           <h3>Personalized Routine Coaching</h3>
           <p>1-on-1 guidance to build sustainable pre-sleep routines that improve sleep latency and morning alertness</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            30-min intake session • Custom routine protocol • Weekly check-ins (4 weeks) • Habit-tracking templates
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
 
-        <article class="feature-card">
+        <article class="feature-card" id="light-mapping">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="24" cy="24" r="20"/>
             <path d="M24 8V24"/>
@@ -1321,19 +1461,27 @@
           </svg>
           <h3>Workspace Light Mapping</h3>
           <p>Analyze and optimize home office lighting for reduced blue light exposure and enhanced melatonin production</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            Remote light audit questionnaire • Equipment recommendations • Setup video tutorials • Before/after photo analysis
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
 
-        <article class="feature-card">
+        <article class="feature-card" id="travel-playbooks">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M8 24H40M16 12L32 12M20 36L28 36"/>
           </svg>
           <h3>Jet Lag & Travel Playbooks</h3>
           <p>Science-backed protocols for rapid time zone adjustment when team members travel or relocate</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            Pre-travel prep checklist • Custom light/meal timing plans • In-flight optimization guide • Post-arrival recovery protocol
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
 
-        <article class="feature-card">
+        <article class="feature-card" id="manager-training">
           <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <rect x="8" y="12" width="32" height="24" rx="2"/>
             <circle cx="18" cy="24" r="3"/>
@@ -1341,6 +1489,10 @@
           </svg>
           <h3>Manager Sleep Literacy</h3>
           <p>Train leaders to recognize fatigue signals and implement team-wide practices that respect natural energy cycles</p>
+          <div class="feature-preview">
+            <strong>What you get:</strong>
+            2-hour manager workshop • Fatigue recognition playbook • Meeting scheduling guidelines • Team wellbeing dashboard access
+          </div>
           <a href="#how-it-works" class="feature-link">Learn more →</a>
         </article>
       </div>
@@ -1405,6 +1557,18 @@
         <p><strong>Intervention components:</strong> Personalized light temperature schedules for each time zone, weekly sleep hygiene workshops, and manager training on recognizing circadian misalignment. Post-implementation surveys showed 89% of participants felt more energized during core collaboration hours, while sick days decreased by 15% quarter-over-quarter (p < 0.05).</p>
 
         <p class="form-note" style="margin-top: var(--space-2);"><sup>3</sup> <a href="#case-studies" style="color: var(--muted);">Download full case study (PDF, 2.4MB)</a> | Client permission granted for anonymized publication</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section after Results -->
+  <section class="cta-section">
+    <div class="container cta-content">
+      <h2>Ready to transform your team's sleep?</h2>
+      <p>Join 500+ remote teams already sleeping better and working brighter</p>
+      <div class="cta-buttons">
+        <a href="#lead-form" class="btn btn-primary">Get Free Audit</a>
+        <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
       </div>
     </div>
   </section>
@@ -1654,65 +1818,88 @@
     <div class="container">
       <h2>Request a Free Sleep Audit</h2>
       <div class="form-container">
-        <form action="#" method="post">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+          <div class="progress-step active" id="progress-step-1">
+            <div class="progress-number">1</div>
+            <span>Basic Info</span>
+          </div>
+          <div class="progress-step" id="progress-step-2">
+            <div class="progress-number">2</div>
+            <span>Team Details</span>
+          </div>
+        </div>
+
+        <form action="#" method="post" id="multi-step-form">
+          <!-- Step 1: Email and Company -->
+          <div class="form-step active" id="step-1">
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" required>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="next-step-1">Continue →</button>
           </div>
 
-          <div class="form-group">
-            <label for="email">Work Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
+          <!-- Step 2: Details -->
+          <div class="form-step" id="step-2">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
 
-          <div class="form-group">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" required>
-          </div>
+            <div class="form-group">
+              <label for="team-size">Team Size</label>
+              <select id="team-size" name="team-size" required>
+                <option value="">Select team size</option>
+                <option value="1-10">1-10 employees</option>
+                <option value="11-25">11-25 employees</option>
+                <option value="26-50">26-50 employees</option>
+                <option value="51-100">51-100 employees</option>
+                <option value="100+">100+ employees</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="team-size">Team Size</label>
-            <select id="team-size" name="team-size" required>
-              <option value="">Select team size</option>
-              <option value="1-10">1-10 employees</option>
-              <option value="11-25">11-25 employees</option>
-              <option value="26-50">26-50 employees</option>
-              <option value="51-100">51-100 employees</option>
-              <option value="100+">100+ employees</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="timezone">Primary Time Zone</label>
+              <select id="timezone" name="timezone" required>
+                <option value="">Select time zone</option>
+                <option value="PST">Pacific (PST/PDT)</option>
+                <option value="MST">Mountain (MST/MDT)</option>
+                <option value="CST">Central (CST/CDT)</option>
+                <option value="EST">Eastern (EST/EDT)</option>
+                <option value="GMT">Greenwich Mean Time (GMT)</option>
+                <option value="CET">Central European (CET)</option>
+                <option value="JST">Japan Standard (JST)</option>
+                <option value="AEST">Australian Eastern (AEST)</option>
+                <option value="Multiple">Multiple time zones</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="timezone">Primary Time Zone</label>
-            <select id="timezone" name="timezone" required>
-              <option value="">Select time zone</option>
-              <option value="PST">Pacific (PST/PDT)</option>
-              <option value="MST">Mountain (MST/MDT)</option>
-              <option value="CST">Central (CST/CDT)</option>
-              <option value="EST">Eastern (EST/EDT)</option>
-              <option value="GMT">Greenwich Mean Time (GMT)</option>
-              <option value="CET">Central European (CET)</option>
-              <option value="JST">Japan Standard (JST)</option>
-              <option value="AEST">Australian Eastern (AEST)</option>
-              <option value="Multiple">Multiple time zones</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="message">Tell us about your team's sleep challenges (optional)</label>
+              <textarea id="message" name="message" placeholder="E.g., late-night Slack messages, energy crashes, timezone coordination..."></textarea>
+            </div>
 
-          <div class="form-group">
-            <label for="message">Tell us about your team's sleep challenges (optional)</label>
-            <textarea id="message" name="message" placeholder="E.g., late-night Slack messages, energy crashes, timezone coordination..."></textarea>
-          </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="consent" name="consent" required>
+              <label for="consent">
+                I agree to receive sleep optimization insights and program updates. 🔒 GDPR-ready • AES-256 encryption • Unsubscribe in 1 click • Never sold
+              </label>
+            </div>
 
-          <div class="checkbox-group">
-            <input type="checkbox" id="consent" name="consent" required>
-            <label for="consent">
-              I agree to receive sleep optimization insights and program updates. No spam, ever. Your data is encrypted and never sold.
-            </label>
-          </div>
+            <div class="form-navigation">
+              <button type="button" class="btn btn-back" id="back-step-2">← Back</button>
+              <button type="submit" class="btn btn-primary">Get My Audit Plan</button>
+            </div>
 
-          <button type="submit" class="btn btn-primary">Get My Audit Plan</button>
-          
-          <p class="form-note">We'll analyze your submission and send a personalized audit plan within 48 hours</p>
+            <p class="form-note">We'll analyze your submission and send a personalized audit plan within 48 hours</p>
+          </div>
         </form>
       </div>
     </div>
@@ -1795,5 +1982,98 @@
       <label for="cookie-dismiss" class="btn btn-primary cookie-accept">Accept & Continue</label>
     </div>
   </div>
+
+  <!-- Sticky CTA Button -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#lead-form" class="btn btn-primary">Get Free Audit</a>
+  </div>
+
+  <script>
+    // Sticky CTA Button - Show after scrolling 300px
+    const stickyCta = document.getElementById('sticky-cta');
+
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+
+    // Multi-step Form Navigation
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const progressStep1 = document.getElementById('progress-step-1');
+    const progressStep2 = document.getElementById('progress-step-2');
+    const nextBtn = document.getElementById('next-step-1');
+    const backBtn = document.getElementById('back-step-2');
+    const form = document.getElementById('multi-step-form');
+
+    // Next button - Step 1 to Step 2
+    nextBtn.addEventListener('click', function() {
+      // Validate step 1 fields
+      const email = document.getElementById('email');
+      const company = document.getElementById('company');
+
+      if (email.validity.valid && company.value.trim() !== '') {
+        // Hide step 1, show step 2
+        step1.classList.remove('active');
+        step2.classList.add('active');
+
+        // Update progress indicator
+        progressStep1.classList.remove('active');
+        progressStep1.classList.add('completed');
+        progressStep2.classList.add('active');
+
+        // Scroll to top of form
+        document.getElementById('lead-form').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Show validation errors
+        if (!email.validity.valid) {
+          email.reportValidity();
+        } else if (company.value.trim() === '') {
+          company.reportValidity();
+        }
+      }
+    });
+
+    // Back button - Step 2 to Step 1
+    backBtn.addEventListener('click', function() {
+      // Hide step 2, show step 1
+      step2.classList.remove('active');
+      step1.classList.add('active');
+
+      // Update progress indicator
+      progressStep2.classList.remove('active');
+      progressStep1.classList.add('active');
+      progressStep1.classList.remove('completed');
+
+      // Scroll to top of form
+      document.getElementById('lead-form').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Form submission (placeholder - you would connect this to your backend)
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get all form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      // Log form data (in production, send to your backend)
+      console.log('Form submitted:', data);
+
+      // Show success message (replace with your own logic)
+      alert('Thank you! We\'ll send your personalized sleep audit plan within 48 hours.');
+
+      // Reset form (optional)
+      form.reset();
+      step2.classList.remove('active');
+      step1.classList.add('active');
+      progressStep2.classList.remove('active');
+      progressStep1.classList.add('active');
+      progressStep1.classList.remove('completed');
+    });
+  </script>
 </body>
 </html>

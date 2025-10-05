@@ -376,7 +376,19 @@
       padding-top: var(--space-8);
     }
 
-    .hero::before,
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(135deg, rgba(11, 16, 38, 0.85), rgba(11, 16, 38, 0.7)),
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80') center/cover no-repeat;
+      z-index: 0;
+    }
+
     .hero::after {
       content: '';
       position: absolute;
@@ -384,21 +396,12 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      opacity: 0.3;
-      animation: aurora 20s ease-in-out infinite;
-    }
-
-    .hero::before {
+      opacity: 0.25;
+      animation: aurora 25s ease-in-out infinite;
       background: radial-gradient(circle at 20% 50%, var(--aurora-cyan) 0%, transparent 50%),
                   radial-gradient(circle at 80% 30%, var(--aurora-magenta) 0%, transparent 50%),
                   radial-gradient(circle at 40% 80%, var(--aurora-violet) 0%, transparent 50%);
-      animation-duration: 25s;
-    }
-
-    .hero::after {
-      background: radial-gradient(circle at 60% 20%, var(--aurora-lime) 0%, transparent 40%),
-                  radial-gradient(circle at 30% 70%, var(--aurora-violet) 0%, transparent 40%);
-      animation-direction: reverse;
+      z-index: 1;
     }
 
     @keyframes aurora {
@@ -486,6 +489,7 @@
     .features {
       padding: var(--space-8) 0;
       position: relative;
+      background: linear-gradient(180deg, transparent, rgba(127, 255, 225, 0.03), transparent);
     }
 
     .features-grid {
@@ -560,6 +564,7 @@
       gap: var(--space-4);
       margin-top: var(--space-6);
       position: relative;
+      counter-reset: timeline-counter;
     }
 
     .timeline::before {
@@ -578,6 +583,16 @@
       position: relative;
       text-align: center;
       z-index: 1;
+      counter-increment: timeline-counter;
+    }
+
+    .timeline-step h3 {
+      line-height: 1.3;
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline-step p {
+      line-height: 1.4;
     }
 
     .step-node {
@@ -595,6 +610,10 @@
       color: var(--aurora-cyan);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
+    }
+
+    .step-node::before {
+      content: counter(timeline-counter);
     }
 
     .timeline-step:hover .step-node {
@@ -630,6 +649,30 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+
+    .sparkline {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 40px;
+    }
+
+    .sparkline-bar {
+      width: 6px;
+      background: linear-gradient(180deg, var(--aurora-cyan), var(--aurora-violet));
+      border-radius: 2px;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .sparkline-bar {
+      opacity: 1;
+      transform: scaleY(1.1);
     }
 
     .stat-label {
@@ -650,6 +693,7 @@
     /* === MINI CASE STUDIES === */
     .mini-case-studies {
       padding: var(--space-8) 0;
+      background: linear-gradient(180deg, transparent, rgba(139, 124, 255, 0.02), transparent);
     }
 
     .mini-cases-grid {
@@ -939,6 +983,7 @@
     .testimonials {
       padding: var(--space-8) 0;
       overflow: hidden;
+      background: linear-gradient(180deg, rgba(127, 255, 225, 0.02), transparent);
     }
 
     .testimonial-carousel {
@@ -999,6 +1044,14 @@
       justify-content: center;
       font-weight: 700;
       color: var(--bg-deep);
+      overflow: hidden;
+      border: 2px solid var(--aurora-cyan);
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .author-info {
@@ -1423,7 +1476,7 @@
             <strong>What you get:</strong>
             Personalized light temperature schedules • Blue light exposure mapping • Lux level recommendations • Time-zone-aware automation scripts
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-circadian-lighting" class="feature-link">Learn more →</a>
         </article>
 
         <article class="feature-card" id="sleep-workshops">
@@ -1437,7 +1490,7 @@
             <strong>What you get:</strong>
             4x 60-min live sessions • Recorded replays • Downloadable sleep toolkit • Chronotype assessment for each team member
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-sleep-workshops" class="feature-link">Learn more →</a>
         </article>
 
         <article class="feature-card" id="routine-coaching">
@@ -1450,7 +1503,7 @@
             <strong>What you get:</strong>
             30-min intake session • Custom routine protocol • Weekly check-ins (4 weeks) • Habit-tracking templates
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-routine-coaching" class="feature-link">Learn more →</a>
         </article>
 
         <article class="feature-card" id="light-mapping">
@@ -1465,7 +1518,7 @@
             <strong>What you get:</strong>
             Remote light audit questionnaire • Equipment recommendations • Setup video tutorials • Before/after photo analysis
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-light-mapping" class="feature-link">Learn more →</a>
         </article>
 
         <article class="feature-card" id="travel-playbooks">
@@ -1478,7 +1531,7 @@
             <strong>What you get:</strong>
             Pre-travel prep checklist • Custom light/meal timing plans • In-flight optimization guide • Post-arrival recovery protocol
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-travel-playbooks" class="feature-link">Learn more →</a>
         </article>
 
         <article class="feature-card" id="manager-training">
@@ -1493,7 +1546,7 @@
             <strong>What you get:</strong>
             2-hour manager workshop • Fatigue recognition playbook • Meeting scheduling guidelines • Team wellbeing dashboard access
           </div>
-          <a href="#how-it-works" class="feature-link">Learn more →</a>
+          <a href="#detail-manager-training" class="feature-link">Learn more →</a>
         </article>
       </div>
     </div>
@@ -1503,24 +1556,35 @@
   <section id="how-it-works" class="how-it-works">
     <div class="container">
       <h2>Your path to better team sleep</h2>
+
+      <!-- Circadian Rhythm Visualization -->
+      <div style="text-align: center; margin: var(--space-4) 0 var(--space-6);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Biological_clock_human.svg/800px-Biological_clock_human.svg.png"
+             alt="Circadian rhythm visualization showing the 24-hour biological clock cycle"
+             style="max-width: 100%; height: auto; max-height: 400px; border-radius: 12px; opacity: 0.9;">
+        <p class="form-note" style="margin-top: var(--space-2); text-align: center;">
+          Your body's natural circadian rhythm influences sleep, alertness, and performance throughout the day
+        </p>
+      </div>
+
       <div class="timeline">
         <div class="timeline-step">
-          <div class="step-node">1</div>
+          <div class="step-node"></div>
           <h3>Assess</h3>
           <p>Complete sleep surveys and light environment audits to establish baseline metrics</p>
         </div>
         <div class="timeline-step">
-          <div class="step-node">2</div>
+          <div class="step-node"></div>
           <h3>Design</h3>
           <p>Receive customized circadian plans and workspace lighting recommendations</p>
         </div>
         <div class="timeline-step">
-          <div class="step-node">3</div>
+          <div class="step-node"></div>
           <h3>Coach</h3>
           <p>4-week guided implementation with weekly check-ins and routine adjustments</p>
         </div>
         <div class="timeline-step">
-          <div class="step-node">4</div>
+          <div class="step-node"></div>
           <h3>Optimize</h3>
           <p>Monthly performance reviews with data-driven refinements and team reports</p>
         </div>
@@ -1534,13 +1598,31 @@
       <h2>Measurable impact on team performance</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-number">↓ 23%</div>
+          <div class="stat-number">
+            ↓ 23%
+            <div class="sparkline">
+              <div class="sparkline-bar" style="height: 35px;"></div>
+              <div class="sparkline-bar" style="height: 30px;"></div>
+              <div class="sparkline-bar" style="height: 25px;"></div>
+              <div class="sparkline-bar" style="height: 18px;"></div>
+              <div class="sparkline-bar" style="height: 12px;"></div>
+            </div>
+          </div>
           <div class="stat-label">Self-reported fatigue reduction</div>
           <p class="form-note">Based on 6-month longitudinal study (n=547 remote workers)<sup><a href="#methodology" style="color: var(--aurora-cyan);">1</a></sup><br>
           Measured using <a href="https://en.wikipedia.org/wiki/Pittsburgh_Sleep_Quality_Index" target="_blank" rel="noopener" style="color: var(--aurora-cyan); text-decoration: underline;">Pittsburgh Sleep Quality Index (PSQI)</a></p>
         </div>
         <div class="stat-card">
-          <div class="stat-number">↑ 18%</div>
+          <div class="stat-number">
+            ↑ 18%
+            <div class="sparkline">
+              <div class="sparkline-bar" style="height: 12px;"></div>
+              <div class="sparkline-bar" style="height: 18px;"></div>
+              <div class="sparkline-bar" style="height: 25px;"></div>
+              <div class="sparkline-bar" style="height: 30px;"></div>
+              <div class="sparkline-bar" style="height: 35px;"></div>
+            </div>
+          </div>
           <div class="stat-label">Increased focus in morning standups</div>
           <p class="form-note">Manager assessment scores, 90-day average (n=342 participants)<sup><a href="#methodology" style="color: var(--aurora-cyan);">2</a></sup><br>
           Validated via <a href="https://en.wikipedia.org/wiki/Epworth_Sleepiness_Scale" target="_blank" rel="noopener" style="color: var(--aurora-cyan); text-decoration: underline;">Epworth Sleepiness Scale (ESS)</a></p>
@@ -1664,7 +1746,7 @@
             <li>Quarterly progress reports</li>
             <li>Email support</li>
           </ul>
-          <a href="#lead-form" class="btn btn-secondary">Start Free Audit</a>
+          <a href="#lead-form" class="btn btn-secondary">Get Free Audit</a>
         </article>
 
         <article class="pricing-card featured">
@@ -1679,7 +1761,7 @@
             <li>Priority Slack support</li>
             <li>Manager sleep literacy training</li>
           </ul>
-          <a href="#lead-form" class="btn btn-primary">Start Free Audit</a>
+          <a href="#lead-form" class="btn btn-primary">Get Free Audit</a>
         </article>
 
         <article class="pricing-card">
@@ -1710,7 +1792,9 @@
           <article class="testimonial-slide">
             <p class="quote">"The light mapping exercise alone transformed my home office. I had no idea how much my evening screen setup was destroying my sleep. Now I fall asleep 45 minutes faster."</p>
             <div class="testimonial-author">
-              <div class="author-avatar">SR</div>
+              <div class="author-avatar">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=faces" alt="Sarah Rodriguez">
+              </div>
               <div class="author-info">
                 <div class="author-name">Sarah Rodriguez</div>
                 <div class="author-title">Engineering Lead, DataSync</div>
@@ -1721,7 +1805,9 @@
           <article class="testimonial-slide">
             <p class="quote">"Our team spans 8 time zones. AuroraSleep helped us create meeting schedules that respect everyone's peak energy windows. Engagement is up, fatigue is down."</p>
             <div class="testimonial-author">
-              <div class="author-avatar">MK</div>
+              <div class="author-avatar">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=faces" alt="Marcus Kim">
+              </div>
               <div class="author-info">
                 <div class="author-name">Marcus Kim</div>
                 <div class="author-title">VP Remote Culture, Nexus</div>
@@ -1732,7 +1818,9 @@
           <article class="testimonial-slide">
             <p class="quote">"The ROI is clear: fewer sick days, sharper decision-making, and a team that actually disconnects at night. This should be standard for every remote company."</p>
             <div class="testimonial-author">
-              <div class="author-avatar">AC</div>
+              <div class="author-avatar">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=faces" alt="Alex Chen">
+              </div>
               <div class="author-info">
                 <div class="author-name">Alex Chen</div>
                 <div class="author-title">CEO, CloudFirst</div>
